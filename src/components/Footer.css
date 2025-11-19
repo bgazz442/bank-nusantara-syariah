@@ -94,6 +94,18 @@
   line-height: 1.6;
 }
 
+/* Ensure footer text is white on mobile/desktop (only font color changed) */
+.footer,
+.footer h3,
+.footer h4,
+.footer p,
+.footer li,
+.footer a:not(.social-icons a),
+.footer .footer-legal,
+.footer .footer-bottom {
+	color: #ffffff !important;
+}
+
 /* Responsif */
 @media (max-width: 768px) {
   .footer-container {

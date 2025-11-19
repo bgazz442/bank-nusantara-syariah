@@ -40,7 +40,7 @@ const Header = () => {
 
   return (
     <nav className="navbar">
-      <div className="nav-container">
+      <div className={`nav-container ${isDropdownOpen ? 'more-open' : ''}`}>
         {/* LOGO */}
         <Link to="/" className="nav-logo-link">
           <img src="/images/logo-bank-nusantara-transparent.png" alt="Bank Nusantara Syariah Logo" className="nav-logo-img" />

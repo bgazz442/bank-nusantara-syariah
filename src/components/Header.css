@@ -197,222 +197,464 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    /* reduce navbar "bulk" on mobile */
-    .navbar {
-        top: 8px; /* naik sedikit agar tidak memberi ruang besar di atas */
-    }
+	.navbar { top: 8px; }
+	.nav-container {
+		gap: 4px; /* lebih rapat dari sebelumnya */
+		padding: 0 12px;
+		padding-top: 8px;
+		padding-bottom: 8px;
+		position: relative;
+		border-radius: 14px;
+		min-height: 48px;
+		align-items: center;
+	}
+	.nav-menu {
+		position: fixed;
+		left: -100%;
+		top: 56px;
+		right: 0;
+		bottom: auto;
+		flex-direction: column;
+		background-color: white;
+		width: 100%;
+		text-align: left;
+		transition: left 0.28s ease, opacity 0.28s ease;
+		box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+		padding: 0.75rem 0.5rem;
+		gap: 0.125rem; /* sangat kecil supaya item berdempetan */
+		z-index: 900;
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+		pointer-events: none;
+		opacity: 0;
+		max-height: calc(100vh - 56px);
+	}
+	.nav-menu.active { left: 0; opacity: 1; pointer-events: auto; }
+	.hamburger {
+		display: flex;
+		margin-left: 4px; /* sedikit jarak agar tidak menempel kaku */
+		align-items: center;
+		z-index: 1001;
+	}
+	.hamburger .bar {
+		width: 18px; /* sebelumnya 20px */
+		height: 3px;
+		background-color: #d97706;
+	}
+	.separator { display: none; }
 
-    .nav-container {
-        gap: 12px; /* lebih ringkas */
-        padding: 0 12px;
-        padding-top: 8px;    /* kurangi padding vertikal */
-        padding-bottom: 8px;
-        position: relative;
-        border-radius: 14px; /* kecilkan pill agar tak terlalu besar */
-        min-height: 48px;    /* pastikan tinggi konsisten */
-        align-items: center;
-    }
+	.more-button {
+		display: inline-flex;
+		align-items: center;
+		padding: 8px 12px;
+		border-radius: 10px;
+		font-size: 0.98rem;
+		color: #ffffff;
+		background-color: #eab308;
+		text-align: center;
+		box-shadow: none;
+		font-weight: 600;
+		border: none;
+		cursor: pointer;
+		z-index: 1002;
+	}
+	.nav-menu .more-button {
+		display: block;
+		width: 100%;
+		padding: 10px 12px;
+		border-radius: 10px;
+		font-size: 0.98rem;
+		color: #ffffff;
+		background-color: #eab308;
+		text-align: left;
+		box-shadow: none;
+		font-weight: 600;
+		border: none;
+		cursor: pointer;
+	}
+	.nav-menu .nav-link {
+		display: block;
+		padding: 10px 12px;
+		border-radius: 10px;
+		font-size: 0.98rem;
+		color: #374151;
+	}
+	.nav-menu .nav-link:hover { transform: none; background-color: #f8f5e6; color: #d97706; }
 
-    /* overlay menu: tampil tepat di bawah navbar, batasi tinggi agar tidak mendorong */
-    .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 56px; /* menempel di bawah navbar yang lebih kecil */
-        right: 0;
-        bottom: auto;
-        flex-direction: column;
-        background-color: white;
-        width: 100%;
-        text-align: left;
-        transition: left 0.28s ease, opacity 0.28s ease;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-        padding: 0.75rem 0.5rem; /* lebih ringkas */
-        gap: 0.5rem;
-        z-index: 900;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        pointer-events: none;
-        opacity: 0;
-        max-height: calc(100vh - 56px); /* jangan dorong layar */
-    }
+	.dropdown-menu {
+		position: static;
+		opacity: 0;
+		visibility: hidden;
+		transform: none;
+		box-shadow: none;
+		background: transparent;
+		margin-top: 0.25rem;
+		padding: 0;
+		min-width: auto;
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.26s ease, opacity 0.18s ease, padding 0.18s ease;
+	}
+	.dropdown:focus-within .dropdown-menu,
+	.dropdown.open .dropdown-menu,
+	.nav-menu.active .dropdown .dropdown-menu {
+		opacity: 1;
+		visibility: visible;
+		max-height: 480px;
+		padding: 0.25rem 0;
+		overflow: auto;
+		position: static;
+		transform: none;
+		box-shadow: none;
+		background: white;
+	}
+	.dropdown-menu li { margin: 0; border-bottom: 1px solid rgba(0,0,0,0.04); border-radius: 0; background: white; }
+	.dropdown-menu a { padding: 10px 12px; background: white; display: block; }
 
-    .nav-menu.active {
-        left: 0;
-        opacity: 1;
-        pointer-events: auto;
-    }
+	/* modern browsers: when dropdown.open present, hide other overlay items and show centered pop-up */
+	.nav-menu:has(.dropdown.open) > :not(.dropdown),
+	.nav-menu:has(.dropdown.open) .dropdown:not(.open) { display: none !important; }
+	.nav-menu .dropdown.open .dropdown-menu,
+	.dropdown.open .dropdown-menu {
+		position: fixed;
+		left: 50%;
+		transform: translateX(-50%);
+		top: calc(56px + 8px);
+		width: calc(100% - 32px);
+		max-width: 420px;
+		background: linear-gradient(135deg,#ffffff 0%,#f9fafb 100%);
+		box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+		border-radius: 12px;
+		border: 1px solid rgba(217,119,6,0.08);
+		opacity: 1;
+		visibility: visible;
+		max-height: 60vh;
+		overflow: auto;
+		padding: 8px 0;
+		margin: 0;
+		z-index: 1003;
+	}
 
-    /* hamburger tetap di kanan tapi jangan menekan tinggi container */
-    .hamburger {
-        display: flex;
-        margin-left: auto;
-        align-items: center;
-        z-index: 1001;
-    }
-
-    .hamburger .bar {
-        width: 24px;
-        height: 3px;
-        background-color: #d97706;
-    }
-
-    /* hide separator on small screens (ke menu) */
-    .separator {
-        display: none;
-    }
-
-    /* HIDE the standalone more-button in the nav container (if present),
-       SHOW and style the more-button when it's located INSIDE .nav-menu */
-    .more-button {
-        /* default hide to avoid duplicate in navbar */
-        display: none;
-    }
-
-    /* if there's a .more-button inside the .nav-menu, show it as a full-width item */
-    .nav-menu .more-button {
-        display: block;
-        width: 100%;
-        padding: 10px 12px;
-        border-radius: 10px;
-        font-size: 0.98rem;
-        color: #ffffff;
-        background-color: #eab308;
-        text-align: left;
-        box-shadow: none;
-        font-weight: 600;
-        border: none;
-        cursor: pointer;
-    }
-
-    .nav-menu .more-button:hover {
-        background-color: #ca8a04;
-        transform: none;
-        color: #fff;
-    }
-
-    /* link lebih compact untuk area sentuh */
-    .nav-menu .nav-link {
-        display: block;
-        padding: 10px 12px;
-        border-radius: 10px;
-        font-size: 0.98rem;
-        color: #374151;
-    }
-
-    .nav-menu .nav-link:hover {
-        transform: none;
-        background-color: #f8f5e6;
-        color: #d97706;
-    }
-
-    /* dropdown jadi bagian aliran normal, tetap ringkas */
-    .dropdown-menu {
-        position: static;
-        opacity: 0;
-        visibility: hidden;
-        transform: none;
-        box-shadow: none;
-        background: transparent;
-        margin-top: 0.25rem;
-        padding: 0;
-        min-width: auto;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.26s ease, opacity 0.18s ease, padding 0.18s ease;
-    }
-
-    /* reveal when the dropdown receives focus (click on its toggle) or if .open class applied */
-    .dropdown:focus-within .dropdown-menu,
-    .nav-menu .dropdown.open .dropdown-menu {
-        opacity: 1;
-        visibility: visible;
-        max-height: 480px; /* cukup untuk daftar, dan bisa discroll jika perlu */
-        padding: 0.25rem 0;
-        overflow: auto;
-    }
-
-    /* ensure individual items remain readable and separated */
-    .dropdown-menu li {
-        margin: 0;
-        border-bottom: 1px solid rgba(0,0,0,0.04);
-        border-radius: 0;
-        background: white;
-    }
-
-    .dropdown-menu a {
-        padding: 10px 12px;
-        background: white;
-    }
-
-    .nav-logo-img {
-        height: 32px;
-    }
-
-    .nav-logo-text {
-        font-size: 1rem;
-    }
+	.nav-logo-img { height: 32px; }
+	.nav-logo-text { font-size: 1rem; }
 }
 
 @media (max-width: 480px) {
-    /* further tighten for very small devices */
-    .nav-container {
-        gap: 10px;
-        padding: 0 10px;
-        padding-top: 6px;
-        padding-bottom: 6px;
-        min-height: 44px;
-        border-radius: 12px;
-    }
+	.nav-container { gap: 4px; padding: 0 10px; padding-top: 6px; padding-bottom: 6px; min-height: 44px; border-radius: 12px; }
+	.nav-menu { top: 52px; padding: 0.5rem 0.5rem; gap: 0.4rem; max-height: calc(100vh - 52px); }
+	.nav-logo-img { height: 28px; }
+	.nav-logo-text { font-size: 0.9rem; }
 
-    .nav-menu {
-        top: 52px; /* sedikit lebih rendah sesuai navbar kecil */
-        padding: 0.5rem 0.5rem;
-        gap: 0.4rem;
-        max-height: calc(100vh - 52px);
-    }
+	.more-button {
+		display: inline-flex;
+		align-items: center;
+		padding: 9px 10px;
+		border-radius: 8px;
+		font-size: 0.95rem;
+		color: #fff;
+		background-color: #eab308;
+		text-align: center;
+		box-shadow: none;
+		font-weight: 600;
+		border: none;
+		cursor: pointer;
+		z-index: 1002;
+	}
+	.nav-menu .more-button { display: block; width: 100%; padding: 9px 10px; border-radius: 8px; font-size: 0.95rem; color: #fff; background-color: #eab308; text-align: left; }
+	.nav-menu .nav-link { padding: 9px 10px; font-size: 0.95rem; }
 
-    .nav-logo-img {
-        height: 28px;
-    }
+	.dropdown-menu { position: static; opacity: 0; visibility: hidden; max-height: 0; overflow: hidden; padding: 0; transition: max-height 0.24s ease, opacity 0.16s ease; }
+	.dropdown:focus-within .dropdown-menu,
+	.dropdown.open .dropdown-menu,
+	.nav-menu.active .dropdown .dropdown-menu {
+		opacity: 1;
+		visibility: visible;
+		max-height: 360px;
+		padding: 0.2rem 0;
+		overflow: auto;
+		background: white;
+	}
 
-    .nav-logo-text {
-        font-size: 0.9rem;
-    }
+	.nav-menu:has(.dropdown.open) > :not(.dropdown),
+	.nav-menu:has(.dropdown.open) .dropdown:not(.open) { display: none !important; }
 
-    /* tetap hide standalone more-button pada layar sangat kecil */
-    .more-button {
-        display: none;
-    }
-
-    /* tampilkan varian di dalam nav-menu bila ada */
-    .nav-menu .more-button {
-        display: block;
-        width: 100%;
-        padding: 9px 10px;
-        border-radius: 8px;
-        font-size: 0.95rem;
-        color: #fff;
-        background-color: #eab308;
-        text-align: left;
-    }
-
-    .nav-menu .more-button:hover {
-        background-color: #ca8a04;
-    }
-
-    .nav-menu .nav-link {
-        padding: 9px 10px;
-        font-size: 0.95rem;
-    }
-
-    .more-button {
-        padding: 8px 16px;
-        font-size: 0.85rem;
-    }
-
-    .dropdown-menu a {
-        padding: 10px 12px;
-        font-size: 0.9rem;
-        background: white;
-    }
+	.nav-menu .dropdown.open .dropdown-menu,
+	.dropdown.open .dropdown-menu {
+		position: fixed;
+		left: 50%;
+		transform: translateX(-50%);
+		top: calc(52px + 6px);
+		width: calc(100% - 24px);
+		max-width: 380px;
+		background: linear-gradient(135deg,#ffffff 0%,#f9fafb 100%);
+		box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+		border-radius: 10px;
+		opacity: 1;
+		visibility: visible;
+		max-height: 55vh;
+		overflow: auto;
+		padding: 6px 0;
+		margin: 0;
+		z-index: 1003;
+	}
 }
+
+/* Tampilkan dropdown "More" ketika overlay nav-menu dibuka (kelas .active ditambahkan oleh JS) */
+@media (max-width: 768px) {
+	/* jika overlay menu (nav-menu) aktif, pastikan dropdown di dalamnya terlihat */
+	.nav-menu.active .dropdown .dropdown-menu {
+		opacity: 1 !important;
+		visibility: visible !important;
+		max-height: 480px !important;
+		padding: 0.25rem 0 !important;
+		overflow: auto !important;
+		position: static; /* tetap bagian aliran overlay */
+		transform: none !important;
+		box-shadow: none !important;
+		background: white !important;
+	}
+
+	/* pastikan tombol more di dalam overlay tampil sebagai item penuh */
+	.nav-menu.active .nav-menu .more-button,
+	.nav-menu.active .more-button,
+	.nav-menu .more-button {
+		display: block !important;
+		width: 100%;
+		padding: 10px 12px;
+		border-radius: 10px;
+		background-color: #eab308;
+		color: #fff;
+		text-align: left;
+		box-shadow: none;
+		font-weight: 600;
+		border: none;
+		cursor: pointer;
+	}
+}
+
+@media (max-width: 480px) {
+	.nav-menu.active .dropdown .dropdown-menu {
+		opacity: 1 !important;
+		visibility: visible !important;
+		max-height: 360px !important;
+		padding: 0.2rem 0 !important;
+		overflow: auto !important;
+		position: static;
+		transform: none !important;
+		box-shadow: none !important;
+		background: white !important;
+	}
+
+	.nav-menu.active .nav-menu .more-button,
+	.nav-menu.active .more-button,
+	.nav-menu .more-button {
+		display: block !important;
+		width: 100%;
+		padding: 9px 10px;
+		border-radius: 8px;
+		background-color: #eab308;
+		color: #fff;
+		text-align: left;
+	}
+}
+
+/* Fix: avoid changing nav-container size — only animate hamburger position and dropdown visibility */
+@media (max-width: 768px) {
+	/* keep nav-container sizing stable (no padding/height changes) */
+	.nav-container {
+		transition: box-shadow 0.18s ease; /* subtle only if needed */
+	}
+
+	/* hamburger position animation only */
+	.hamburger {
+		margin-left: 2px;
+		transition: margin-left 0.18s ease;
+	}
+
+	/* when More popup open, shift hamburger slightly to create gap (no layout resize) */
+	.nav-container.more-open .hamburger {
+		margin-left: 14px;
+	}
+
+	/* dropdown animation: use opacity + translateY for smooth appearance (no layout jumps) */
+	.dropdown-menu {
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(-6px);
+		transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s;
+	}
+
+	/* show dropdown smoothly */
+	.dropdown.show .dropdown-menu,
+	.dropdown.open .dropdown-menu,
+	.nav-menu.active .dropdown .dropdown-menu {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+		transition-delay: 0s;
+	}
+}
+
+@media (max-width: 480px) {
+	.hamburger {
+		margin-left: 2px;
+		transition: margin-left 0.16s ease;
+	}
+	.nav-container.more-open .hamburger {
+		margin-left: 10px;
+	}
+
+	.dropdown-menu {
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(-6px);
+		transition: opacity 0.16s ease, transform 0.16s ease, visibility 0s linear 0.16s;
+	}
+	.dropdown.show .dropdown-menu,
+	.dropdown.open .dropdown-menu,
+	.nav-menu.active .dropdown .dropdown-menu {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+		transition-delay: 0s;
+	}
+}
+
+/* Footer — mobile-first, rapi dan konsisten */
+footer {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 18px;
+	background: #fff;
+	border-top: 1px solid rgba(0,0,0,0.06);
+	color: #374151;
+	font-size: 14px;
+}
+
+footer .footer-container,
+footer .footer-inner {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 18px;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+footer .footer-section {
+	flex: 1 1 200px;
+	min-width: 160px;
+}
+
+footer h3, footer h4 {
+	margin: 0 0 8px;
+	font-weight: 700;
+	color: #0f172a;
+}
+
+footer p, footer li, footer a {
+	margin: 0;
+	color: #374151;
+	line-height: 1.4;
+}
+
+footer ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+footer .social-icons {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+footer a,
+footer .footer-cta,
+footer .footer-action,
+footer a.more-info-button {
+	text-decoration: none;
+	font-weight: 600;
+}
+
+footer .footer-cta,
+footer .footer-action,
+footer a.more-info-button {
+	background: #eab308;
+	color: #fff;
+	padding: 8px 12px;
+	border-radius: 9999px;
+	display: inline-block;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+footer .footer-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+footer .footer-legal {
+	color: #6b7280;
+	font-size: 12px;
+	margin-top: 12px;
+	text-align: left;
+}
+
+/* separator */
+footer hr {
+	border: none;
+	border-top: 1px solid rgba(0,0,0,0.06);
+	margin: 14px 0;
+}
+
+/* MOBILE: stack, center content, full-width CTAs (bounded) */
+@media (max-width: 768px) {
+	footer {
+		padding: 14px 12px;
+		font-size: 14px;
+	}
+	footer .footer-container,
+	footer .footer-inner {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 12px;
+	}
+	footer .footer-section {
+		width: 100%;
+		flex: none;
+	}
+	footer .footer-links {
+		justify-content: center;
+	}
+	/* CTAs full-width but capped for readability */
+	footer .footer-cta,
+	footer .footer-action,
+	footer a.more-info-button {
+		width: 100%;
+		max-width: 420px;
+		padding: 10px 14px;
+		text-align: center;
+	}
+	footer .footer-legal {
+		text-align: center;
+		margin-top: 8px;
+	}
+}
+
+/* VERY SMALL SCREENS */
+@media (max-width: 480px) {
+	footer { padding: 12px 10px; font-size: 13px; }
+	footer .footer-container,
+	footer .footer-inner { gap: 10px; }
+	footer .footer-cta,
+	footer .footer-action,
+	footer a.more-info-button { padding: 10px 12px; font-size: 14px; }
+	footer .footer-section p,
+	footer .footer-section li { font-size: 13px; }
+}
+
+/* end of footer styles */

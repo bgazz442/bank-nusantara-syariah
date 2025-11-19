@@ -1,0 +1,13 @@
+/* Knowledge Bank Syariah - Modern Fintech Style */
+.principles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.principles-list .principle-item {
+  color: #cbd5e1;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}

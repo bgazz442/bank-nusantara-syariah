@@ -1,0 +1,44 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.dark .App {
+  background-color: transparent;
+  color: #fff;
+}
+
+main {
+  flex: 1;
+}
+
+/* Page Transition Styles */
+.page-transition {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.page-enter {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-exit {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Smooth transition for all page changes */
+.page-transition {
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .App {
+    font-size: 14px;
+  }
+}

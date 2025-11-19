@@ -1,0 +1,45 @@
+/* Effects CSS - Additional styles for animations */
+
+/* Ensure smooth animations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Default cursor restored */
+body {
+  cursor: auto;
+}
+
+/* Custom cursor styles - Neon RGB */
+.cursor-custom {
+  will-change: transform, box-shadow, left, top;
+  transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94), width 0.2s ease, height 0.2s ease;
+}
+
+/* Particle canvas styles */
+#particle-canvas {
+  will-change: auto;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .cursor-custom {
+    transition: none !important;
+  }
+
+  #particle-canvas {
+    display: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .cursor-custom {
+    border: 2px solid currentColor !important;
+    background: currentColor !important;
+    box-shadow: none !important;
+  }
+}

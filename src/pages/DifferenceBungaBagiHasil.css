@@ -1,0 +1,26 @@
+/* Difference Bunga Bagi Hasil - Modern Fintech Style */
+.difference-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.difference-list li {
+  color: #cbd5e1;
+  line-height: 1.5;
+  font-size: 0.95rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.difference-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #3b82f6;
+  font-weight: bold;
+  font-size: 1.2rem;
+}

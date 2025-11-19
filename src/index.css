@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light Mode */
+body.light {
+  background-color: #ffffff;
+  color: #343a40;
+}
+
+/* Dark Mode */
+body.dark {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+/* RGB Mode */
+body.rgb {
+  background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff, #ff00ff, #ffff00, #00ffff);
+  background-size: 400% 400%;
+  animation: rgbShift 3s ease-in-out infinite;
+  color: #ffffff;
+}
+
+@keyframes rgbShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@keyframes popUp {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-popUp {
+  animation: popUp 0.25s ease-out forwards;
+}
+
+/* Moving background text effect */
+.moving-bg-text {
+  background: linear-gradient(90deg, #00AEEF, #fff, #00AEEF);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: moveBg 3s linear infinite;
+}
+
+@keyframes moveBg {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>Produk & Layanan - Bank Nusantara</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h2>Bank Nusantara</h2>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="produk.html" class="nav-link active">Produk</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="visi-misi.html" class="nav-link">Visi & Misi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#kontak" class="nav-link">Kontak</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Produk & Layanan</h1>
+            <p class="page-description">
+                Temukan berbagai produk perbankan yang dirancang khusus untuk memenuhi kebutuhan finansial Anda
+            </p>
+        </div>
+    </section>
+
+    <!-- Filter Tabs -->
+    <section class="product-filter">
+        <div class="container">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-category="all">Semua Produk</button>
+                <button class="filter-tab" data-category="tabungan">Tabungan</button>
+                <button class="filter-tab" data-category="kredit">Kredit</button>
+                <button class="filter-tab" data-category="investasi">Investasi</button>
+                <button class="filter-tab" data-category="asuransi">Asuransi</button>
+                <button class="filter-tab" data-category="digital">Digital Banking</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="products">
+        <div class="container">
+            <div class="products-grid" id="productsGrid">
+                <!-- Tabungan Products -->
+                <div class="product-card" data-category="tabungan">
+                    <div class="product-icon">💰</div>
+                    <h3 class="product-title">Tabungan Reguler</h3>
+                    <p class="product-description">Tabungan dengan bunga kompetitif dan kemudahan akses kapan saja.</p>
+                    <div class="product-features">
+                        <span class="feature">Bunga 3.5% p.a</span>
+                        <span class="feature">Setoran awal Rp 50.000</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="tabungan">
+                    <div class="product-icon">🎯</div>
+                    <h3 class="product-title">Tabungan Berjangka</h3>
+                    <p class="product-description">Tabungan dengan target dan jangka waktu tertentu untuk mencapai tujuan finansial.</p>
+                    <div class="product-features">
+                        <span class="feature">Bunga hingga 4.5% p.a</span>
+                        <span class="feature">Tenor 1-5 tahun</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="tabungan">
+                    <div class="product-icon">👶</div>
+                    <h3 class="product-title">Tabungan Anak</h3>
+                    <p class="product-description">Tabungan khusus untuk anak dengan fitur edukasi keuangan.</p>
+                    <div class="product-features">
+                        <span class="feature">Tanpa biaya admin</span>
+                        <span class="feature">Kartu ATM khusus anak</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="tabungan">
+                    <div class="product-icon">🎓</div>
+                    <h3 class="product-title">Tabungan Pendidikan</h3>
+                    <p class="product-description">Tabungan untuk mempersiapkan dana pendidikan anak di masa depan.</p>
+                    <div class="product-features">
+                        <span class="feature">Bunga 4% p.a</span>
+                        <span class="feature">Asuransi jiwa gratis</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="tabungan">
+                    <div class="product-icon">🏠</div>
+                    <h3 class="product-title">Tabungan Rumah</h3>
+                    <p class="product-description">Tabungan khusus untuk mewujudkan impian memiliki rumah idaman.</p>
+                    <div class="product-features">
+                        <span class="feature">Bunga 4.2% p.a</span>
+                        <span class="feature">Konsultasi properti gratis</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="tabungan">
+                    <div class="product-icon">🌟</div>
+                    <h3 class="product-title">Tabungan Premium</h3>
+                    <p class="product-description">Tabungan eksklusif dengan berbagai privilege dan layanan premium.</p>
+                    <div class="product-features">
+                        <span class="feature">Bunga 5% p.a</span>
+                        <span class="feature">Priority banking</span>
+                    </div>
+                </div>
+
+                <!-- Kredit Products -->
+                <div class="product-card" data-category="kredit">
+                    <div class="product-icon">🏠</div>
+                    <h3 class="product-title">KPR Rumah</h3>
+                    <p class="product-description">Kredit pemilikan rumah dengan bunga tetap dan tenor fleksibel.</p>
+                    <div class="product-features">
+                        <span class="feature">Bunga mulai 6.5% p.a</span>
+                        <span class="feature">Tenor hingga 20 tahun</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="kredit">
+                    <div class="product-icon">🚗</div>
+                    <h3 class="product-title">Kredit Kendaraan</h3>
+                    <p class="product-description">Kredit untuk pembelian mobil dan motor baru maupun bekas.</p>
+                    <div class="product-features">
+                        <span class="feature">DP mulai 20%</span>
+                        <span class="feature">Proses cepat 3 hari</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="kredit">
+                    <div class="product-icon">💼</div>
+                    <h3 class="product-title">Kredit Usaha</h3>
+                    <p class="product-description">Modal usaha untuk mengembangkan bisnis UMKM dengan bunga kompetitif.</p>
+                    <div class="product-features">
+                        <span class="feature">Limit hingga Rp 2M</span>
+                        <span class="feature">Tanpa jaminan</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="kredit">
+                    <div class="product-icon">💳</div>
+                    <h3 class="product-title">Kredit Tanpa Agunan</h3>
+                    <p class="product-description">Pinjaman tunai tanpa jaminan untuk berbagai kebutuhan mendesak.</p>
+                    <div class="product-features">
+                        <span class="feature">Limit hingga Rp 500jt</span>
+                        <span class="feature">Proses online</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="kredit">
+                    <div class="product-icon">🎓</div>
+                    <h3 class="product-title">Kredit Pendidikan</h3>
+                    <p class="product-description">Pembiayaan pendidikan untuk kuliah dalam dan luar negeri.</p>
+                    <div class="product-features">
+                        <span class="feature">Bunga 7% p.a</span>
+                        <span class="feature">Grace period tersedia</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="kredit">
+                    <div class="product-icon">🏥</div>
+                    <h3 class="product-title">Kredit Kesehatan</h3>
+                    <p class="product-description">Pembiayaan untuk biaya pengobatan dan perawatan medis.</p>
+                    <div class="product-features">
+                        <span class="feature">Limit hingga Rp 1M</span>
+                        <span class="feature">Proses 24 jam</span>
+                    </div>
+                </div>
+
+                <!-- Investasi Products -->
+                <div class="product-card" data-category="investasi">
+                    <div class="product-icon">📈</div>
+                    <h3 class="product-title">Deposito Berjangka</h3>
+                    <p class="product-description">Investasi aman dengan bunga tetap dan jaminan LPS.</p>
+                    <div class="product-features">
+                        <span class="feature">Bunga hingga 6% p.a</span>
+                        <span class="feature">Tenor 1-24 bulan</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="investasi">
+                    <div class="product-icon">📊</div>
+                    <h3 class="product-title">Reksa Dana</h3>
+                    <p class="product-description">Investasi reksa dana dengan berbagai pilihan profil risiko.</p>
+                    <div class="product-features">
+                        <span class="feature">Mulai Rp 100.000</span>
+                        <span class="feature">Diversifikasi optimal</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="investasi">
+                    <div class="product-icon">🏛️</div>
+                    <h3 class="product-title">Obligasi Pemerintah</h3>
+                    <p class="product-description">Investasi obligasi negara dengan tingkat keamanan tinggi.</p>
+                    <div class="product-features">
+                        <span class="feature">Dijamin pemerintah</span>
+                        <span class="feature">Kupon tetap</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="investasi">
+                    <div class="product-icon">🥇</div>
+                    <h3 class="product-title">Emas Digital</h3>
+                    <p class="product-description">Investasi emas dalam bentuk digital yang aman dan mudah.</p>
+                    <div class="product-features">
+                        <span class="feature">Mulai 0.01 gram</span>
+                        <span class="feature">Buyback guaranteed</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="investasi">
+                    <div class="product-icon">🌍</div>
+                    <h3 class="product-title">Saham Global</h3>
+                    <p class="product-description">Investasi saham domestik dan internasional melalui platform terintegrasi.</p>
+                    <div class="product-features">
+                        <span class="feature">Fee transaksi rendah</span>
+                        <span class="feature">Real-time trading</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="investasi">
+                    <div class="product-icon">🏢</div>
+                    <h3 class="product-title">Investasi Properti</h3>
+                    <p class="product-description">Crowdfunding properti untuk investasi real estate dengan modal kecil.</p>
+                    <div class="product-features">
+                        <span class="feature">Mulai Rp 1 juta</span>
+                        <span class="feature">Return hingga 15% p.a</span>
+                    </div>
+                </div>
+
+                <!-- Asuransi Products -->
+                <div class="product-card" data-category="asuransi">
+                    <div class="product-icon">❤️</div>
+                    <h3 class="product-title">Asuransi Jiwa</h3>
+                    <p class="product-description">Perlindungan jiwa dengan manfaat investasi untuk masa depan keluarga.</p>
+                    <div class="product-features">
+                        <span class="feature">UP hingga Rp 10M</span>
+                        <span class="feature">Premi terjangkau</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="asuransi">
+                    <div class="product-icon">🏥</div>
+                    <h3 class="product-title">Asuransi Kesehatan</h3>
+                    <p class="product-description">Perlindungan kesehatan komprehensif untuk seluruh keluarga.</p>
+                    <div class="product-features">
+                        <span class="feature">Cashless di 1000+ RS</span>
+                        <span class="feature">Cover rawat jalan</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="asuransi">
+                    <div class="product-icon">🚗</div>
+                    <h3 class="product-title">Asuransi Kendaraan</h3>
+                    <p class="product-description">Perlindungan menyeluruh untuk kendaraan bermotor dari berbagai risiko.</p>
+                    <div class="product-features">
+                        <span class="feature">All risk & TLO</span>
+                        <span class="feature">Bengkel rekanan luas</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="asuransi">
+                    <div class="product-icon">🏠</div>
+                    <h3 class="product-title">Asuransi Properti</h3>
+                    <p class="product-description">Perlindungan rumah dan properti dari kebakaran, banjir, dan bencana alam.</p>
+                    <div class="product-features">
+                        <span class="feature">Ganti rugi penuh</span>
+                        <span class="feature">Proses klaim mudah</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="asuransi">
+                    <div class="product-icon">✈️</div>
+                    <h3 class="product-title">Asuransi Perjalanan</h3>
+                    <p class="product-description">Perlindungan saat bepergian domestik maupun internasional.</p>
+                    <div class="product-features">
+                        <span class="feature">Cover medical emergency</span>
+                        <span class="feature">Bagasi hilang</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="asuransi">
+                    <div class="product-icon">🎯</div>
+                    <h3 class="product-title">Asuransi Pendidikan</h3>
+                    <p class="product-description">Jaminan dana pendidikan anak dengan perlindungan jiwa orang tua.</p>
+                    <div class="product-features">
+                        <span class="feature">Tahapan pencairan</span>
+                        <span class="feature">Bebas premi jika meninggal</span>
+                    </div>
+                </div>
+
+                <!-- Digital Banking Products -->
+                <div class="product-card" data-category="digital">
+                    <div class="product-icon">📱</div>
+                    <h3 class="product-title">Mobile Banking</h3>
+                    <p class="product-description">Aplikasi mobile banking dengan fitur lengkap dan keamanan tinggi.</p>
+                    <div class="product-features">
+                        <span class="feature">Transfer gratis</span>
+                        <span class="feature">Biometric login</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="digital">
+                    <div class="product-icon">💻</div>
+                    <h3 class="product-title">Internet Banking</h3>
+                    <p class="product-description">Layanan perbankan online 24/7 melalui website resmi bank.</p>
+                    <div class="product-features">
+                        <span class="feature">Multi-user access</span>
+                        <span class="feature">Laporan real-time</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="digital">
+                    <div class="product-icon">💳</div>
+                    <h3 class="product-title">Kartu Kredit Digital</h3>
+                    <p class="product-description">Kartu kredit virtual dengan approval instan dan limit fleksibel.</p>
+                    <div class="product-features">
+                        <span class="feature">Cashback hingga 10%</span>
+                        <span class="feature">Tanpa annual fee</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="digital">
+                    <div class="product-icon">📲</div>
+                    <h3 class="product-title">QRIS Payment</h3>
+                    <p class="product-description">Pembayaran digital menggunakan QR code di seluruh merchant Indonesia.</p>
+                    <div class="product-features">
+                        <span class="feature">Cashback 1%</span>
+                        <span class="feature">Tanpa biaya admin</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="digital">
+                    <div class="product-icon">🔔</div>
+                    <h3 class="product-title">SMS Banking</h3>
+                    <p class="product-description">Layanan perbankan melalui SMS untuk kemudahan akses di mana saja.</p>
+                    <div class="product-features">
+                        <span class="feature">Cek saldo instan</span>
+                        <span class="feature">Transfer antar bank</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="digital">
+                    <div class="product-icon">🎧</div>
+                    <h3 class="product-title">Phone Banking</h3>
+                    <p class="product-description">Layanan perbankan melalui telepon dengan customer service berpengalaman.</p>
+                    <div class="product-features">
+                        <span class="feature">24/7 support</span>
+                        <span class="feature">Multi-language</span>
+                    </div>
+                </div>
+
+                <!-- Additional Products -->
+                <div class="product-card" data-category="tabungan">
+                    <div class="product-icon">💎</div>
+                    <h3 class="product-title">Tabungan Haji</h3>
+                    <p class="product-description">Tabungan khusus untuk mempersiapkan dana ibadah haji dan umrah.</p>
+                    <div class="product-features">
+                        <span class="feature">Sesuai syariah</span>
+                        <span class="feature">Bagi hasil kompetitif</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="kredit">
+                    <div class="product-icon">🌾</div>
+                    <h3 class="product-title">Kredit Pertanian</h3>
+                    <p class="product-description">Pembiayaan khusus untuk sektor pertanian dan agribisnis.</p>
+                    <div class="product-features">
+                        <span class="feature">Bunga subsidi</span>
+                        <span class="feature">Tenor sesuai musim</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="investasi">
+                    <div class="product-icon">💰</div>
+                    <h3 class="product-title">Sukuk Ritel</h3>
+                    <p class="product-description">Investasi sukuk negara sesuai prinsip syariah dengan return menarik.</p>
+                    <div class="product-features">
+                        <span class="feature">Halal dan aman</span>
+                        <span class="feature">Floating rate</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="digital">
+                    <div class="product-icon">🤖</div>
+                    <h3 class="product-title">AI Financial Advisor</h3>
+                    <p class="product-description">Konsultasi keuangan dengan AI untuk perencanaan finansial personal.</p>
+                    <div class="product-features">
+                        <span class="feature">24/7 available</span>
+                        <span class="feature">Personalized advice</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="asuransi">
+                    <div class="product-icon">🎮</div>
+                    <h3 class="product-title">Asuransi Cyber</h3>
+                    <p class="product-description">Perlindungan dari risiko cyber crime dan pencurian identitas digital.</p>
+                    <div class="product-features">
+                        <span class="feature">Cover fraud online</span>
+                        <span class="feature">Identity restoration</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-category="tabungan">
+                    <div class="product-icon">🎁</div>
+                    <h3 class="product-title">Tabungan Hadiah</h3>
+                    <p class="product-description">Tabungan dengan sistem undian berhadiah menarik setiap bulan.</p>
+                    <div class="product-features">
+                        <span class="feature">Hadiah jutaan rupiah</span>
+                        <span class="feature">Semakin banyak saldo, semakin besar peluang</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Siap Memulai Perjalanan Finansial Anda?</h2>
+                <p class="cta-description">
+                    Hubungi kami sekarang untuk konsultasi gratis dan temukan produk yang tepat untuk kebutuhan Anda.
+                </p>
+                <div class="cta-buttons">
+                    <a href="index.html#kontak" class="btn btn-primary">Hubungi Kami</a>
+                    <a href="visi-misi.html" class="btn btn-secondary">Pelajari Lebih Lanjut</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">Bank Nusantara</h3>
+                    <p class="footer-description">
+                        Solusi keuangan terpercaya untuk masa depan yang lebih baik.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-subtitle">Navigasi</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="produk.html">Produk</a></li>
+                        <li><a href="visi-misi.html">Visi & Misi</a></li>
+                        <li><a href="index.html#kontak">Kontak</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 Bank Nusantara. Seluruh hak cipta dilindungi undang-undang.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>

@@ -16,6 +16,35 @@ const HeroSection = ({
   const [ready, setReady] = useState(false); // true setelah minimal gambar pertama terload
   const timerRef = useRef(null);
 
+  // typing effect state for hero title
+  const fullTitle = "Solusi Keuangan Terpercaya Untuk Masa Depan Anda";
+  const [typedTitle, setTypedTitle] = useState("");
+
+  useEffect(() => {
+    let index = 0;
+    const speed = 60; // ms per character
+    const pause = 2000; // jeda setelah selesai mengetik sebelum mengulang
+    let timeoutId;
+
+    const type = () => {
+      if (index <= fullTitle.length) {
+        setTypedTitle(fullTitle.slice(0, index));
+        index += 1;
+        timeoutId = setTimeout(type, speed);
+      } else {
+        // setelah selesai, reset dan tunggu sebentar sebelum mulai lagi
+        index = 0;
+        timeoutId = setTimeout(type, pause);
+      }
+    };
+
+    type();
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [fullTitle]);
+
   // Preload images (promise-based). Set ready when at least first image loaded.
   useEffect(() => {
     let isMounted = true;
@@ -71,7 +100,8 @@ const HeroSection = ({
   const layerStyle = (src, visible, idx) => ({
     backgroundImage: `url(${src})`,
     backgroundSize: "cover",
-    backgroundPosition: "center top", // Raised position to avoid mirroring in navbar area
+    // Posisi sedikit lebih ke tengah supaya area penting gambar mengikuti posisi kartu kredit
+    backgroundPosition: "center 40%",
     position: "absolute",
     inset: 0,
     transition: `opacity ${fadeMs}ms ease-in-out`,
@@ -90,7 +120,7 @@ const HeroSection = ({
 
   return (
     <section
-      className="relative flex flex-col items-center justify-center text-center text-white overflow-hidden"
+      className="hero-root relative flex flex-col items-center justify-center text-center text-white overflow-hidden"
       style={{ minHeight: "100vh", paddingTop: "140px", paddingBottom: "80px" }} // atau h-screen jika mau full height
       aria-roledescription="carousel"
       aria-label="Hero slideshow"
@@ -121,12 +151,67 @@ const HeroSection = ({
 
       {/* Konten hero (tetap di atas semua layer) */}
       <div style={{ position: "relative", zIndex: 2, padding: "2rem" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center", maxWidth: "1200px", margin: "0 auto" }}>
-          <div>
-            <h1 style={{ fontSize: "3.5rem", fontWeight: 700, marginBottom: "1.5rem", lineHeight: 1.2, letterSpacing: "-1px" }}>
-              <span style={{ color: "#87CEEB" }}>Solusi Keuangan Terpercaya Untuk Masa Depan Anda</span>
+        <div
+          className="hero-inner"
+          style={{
+            maxWidth: "1200px",
+            margin: "0 auto",
+            gap: "2rem",
+          }}
+        >
+          <div
+            className="hero-text"
+            style={{
+              minHeight: "200px", // sedikit lebih pendek agar ruang kartu lebih lega
+            }}
+          >
+            <h1
+              style={{
+                fontSize: "3.5rem",
+                fontWeight: 700,
+                marginBottom: "1.5rem",
+                lineHeight: 1.2,
+                letterSpacing: "-1px",
+              }}
+            >
+              {/* Reserve fixed width/height with full title so layout tidak berubah saat typing */}
+              <span
+                style={{
+                  position: "relative",
+                  display: "inline-block",
+                }}
+              >
+                {/* Ghost text: full title transparan sebagai penyangga layout */}
+                <span
+                  style={{
+                    visibility: "hidden",
+                  }}
+                >
+                  {fullTitle}
+                </span>
+
+                {/* Typed text overlay tepat di atas ghost text */}
+                <span
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    color: "#87CEEB",
+                  }}
+                >
+                  {typedTitle}
+                </span>
+              </span>
             </h1>
-            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", alignItems: "center", marginBottom: "2.5rem", marginLeft: "6rem" }}>
+            <div
+              style={{
+                display: "flex",
+                gap: "1rem",
+                flexWrap: "wrap",
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: "1.75rem",
+              }}
+            >
               <a
                 href="/products"
                 style={{
@@ -164,23 +249,43 @@ const HeroSection = ({
               </a>
             </div>
           </div>
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <img
-              src="/images/WhatsApp Image 2025-11-08 at 15.10.33_1a4edee3.jpg"
-              alt="Kartu Bank Nusantara"
+
+          {/* Kartu kredit: di bawah teks pada mobile, di samping teks pada desktop */}
+          <div
+            className="hero-card-wrapper"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: "2rem",
+            }}
+          >
+            <div
               style={{
-                width: "350px",
-                height: "220px",
-                borderRadius: "30px",
-                boxShadow: "0 20px 60px rgba(0,0,0,0.2)",
-                position: "relative",
-                overflow: "hidden",
-                transform: "perspective(1000px) rotateY(-15deg) rotateX(5deg)",
-                transition: "transform 0.3s ease",
-                animation: "float 6s ease-in-out infinite",
-                objectFit: "cover"
+                padding: "1.25rem 1.75rem",
+                borderRadius: "34px",
+                background: "rgba(0, 0, 0, 0.25)",
+                boxShadow: "0 16px 48px rgba(0,0,0,0.35)",
+                backdropFilter: "blur(6px)",
               }}
-            />
+            >
+              <img
+                className="hero-card-image"
+                src="/images/WhatsApp Image 2025-11-08 at 15.10.33_1a4edee3.jpg"
+                alt="Kartu Bank Nusantara"
+                style={{
+                  borderRadius: "30px",
+                  boxShadow: "0 20px 60px rgba(0,0,0,0.2)",
+                  position: "relative",
+                  overflow: "hidden",
+                  transform:
+                    "perspective(1000px) rotateY(-15deg) rotateX(5deg)",
+                  transition: "transform 0.3s ease",
+                  animation: "float 6s ease-in-out infinite",
+                  objectFit: "cover",
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -194,10 +299,104 @@ const HeroSection = ({
             0%, 100% { transform: perspective(1000px) rotateY(-15deg) rotateX(5deg) translateY(0px); }
             50% { transform: perspective(1000px) rotateY(-15deg) rotateX(5deg) translateY(-10px); }
           }
+
+          /* Layout dasar: mobile dulu (kolom, kartu di bawah judul) */
+          .hero-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 2rem;
+          }
+
+          .hero-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .hero-card-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1.5rem;
+          }
+
+          /* ukuran dasar kartu: kecil dan proporsional */
+          .hero-card-image {
+            width: 180px;
+            height: auto;
+            max-width: 40vw;
+          }
+
+          /* Penyesuaian khusus mobile: kartu lebih dekat ke judul dan sedikit lebih kecil */
+          @media (max-width: 768px) {
+            .hero-root {
+              /* override min-height 100vh di inline style agar tinggi hero mengikuti konten saja */
+              min-height: auto !important;
+              padding-top: 88px;
+              padding-bottom: 48px; /* cukup panjang supaya background menutupi area di bawah kartu */
+            }
+
+            .hero-inner {
+              gap: 1.25rem; /* kurangi jarak antara teks dan kartu */
+            }
+
+            .hero-text {
+              /* biar tinggi area teks tidak memaksa kartu terlalu jauh ke bawah */
+              min-height: auto !important;
+            }
+
+            .hero-card-wrapper {
+              margin-top: 10rem !important; /* sedikit lebih rendah, tetap override inline marginTop 2rem */
+            }
+
+            .hero-card-image {
+              width: 160px;
+              max-width: 60vw;
+            }
+          }
+
+          /* Layout responsif hero: samping-sampingan di desktop */
+          @media (min-width: 1024px) {
+            .hero-inner {
+              flex-direction: row;
+              align-items: center;
+              text-align: left;
+            }
+
+            .hero-text {
+              align-items: flex-start;
+              justify-content: center;
+              flex: 1 1 50%;
+              margin-top: -16px; /* naikan teks+CTA sedikit agar kartu sejajar background */
+            }
+
+            .hero-card-wrapper {
+              margin-top: 0;
+              justify-content: flex-end;
+              align-items: center;
+              flex: 1 30%;
+            }
+
+            /* Desktop only: hilangkan panel background blur di belakang kartu */
+            .hero-card-wrapper > div {
+              background: transparent;
+              box-shadow: none;
+              padding: 0;
+            }
+
+            .hero-card-image {
+              width: 100px; /* lebih kecil khusus desktop, mobile & base tetap */
+              max-width: 90%;
+            }
+          }
         `}
       </style>
     </section>
   );
+
 };
 
 export default HeroSection;

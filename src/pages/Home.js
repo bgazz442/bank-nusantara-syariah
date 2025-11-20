@@ -11,7 +11,7 @@ const Home = () => {
   const images = [
     "/images/kluarga.jpg", // Gambar pertama
     "/images/playananm.jpg", // Gambar kedua
-     // Gambar ketiga
+    
   ];
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

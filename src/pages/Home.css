@@ -1517,6 +1517,116 @@ body {
     }
 }
 
+@media (max-width: 480px) {
+	/* reduce overall hero vertical size so background tidak terlalu besar */
+	.hero {
+		padding: 72px 12px 28px; /* lebih ringkas vertikal, beri ruang untuk tombol */
+		min-height: auto;
+		max-height: 78vh;
+		overflow: visible;
+	}
+
+	/* limit background visual area so it tidak cover seluruh viewport */
+	.hero-bg-layer {
+		background-size: cover !important;
+		background-position: center !important;
+		position: absolute;
+		inset: 0;
+		max-height: 48vh; /* <- inti: batasi tinggi bg agar tidak kegedean */
+		height: 48vh;
+		overflow: hidden;
+		pointer-events: none;
+	}
+
+	/* overlay tetap menutupi bg tapi tombol berada di atas (z-index) */
+	.hero-overlay {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+	}
+
+	/* beri ruang bawah di hero-container supaya tombol tidak keluar area bg */
+	.hero-container {
+		grid-template-columns: 1fr;
+		gap: 1.25rem;
+		padding-left: 12px;
+		padding-right: 12px;
+		padding-bottom: 14px; /* pastikan tombol tetap di dalam area */
+		z-index: 2;
+	}
+
+	/* tombol: full-width namun batasi lebar untuk keterbacaan */
+	.hero-buttons {
+		flex-direction: column;
+		gap: 0.6rem;
+		align-items: center;
+		position: relative;
+		z-index: 3; /* pastikan tombol di atas overlay/bg */
+		margin-top: 0.6rem;
+	}
+	.hero-buttons .btn,
+	.btn-primary,
+	.btn-secondary {
+		width: 100%;
+		max-width: 360px;
+		margin-left: auto;
+		margin-right: auto;
+		box-sizing: border-box;
+		padding: 0.9rem 12px;
+		font-size: 0.95rem;
+	}
+
+	/* hero-card: responsive, tanpa 3D transform yang memotong layout */
+	.hero-card {
+		width: 100%;
+		max-width: 360px;
+		height: auto !important;
+		min-height: 140px;
+		padding: 1rem;
+		transform: none !important;
+		perspective: none !important;
+		margin: 0 auto 8px;
+		box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+		border-radius: 14px;
+	}
+
+	/* cards lainnya: hilangkan fixed height untuk mobile */
+	.service-card,
+	.product-card,
+	.mission-card,
+	.value-card,
+	.article-card {
+		height: auto !important;
+		min-height: auto !important;
+		padding: 1rem !important;
+		border-radius: 12px;
+	}
+
+	/* cap image heights to avoid overflow */
+	.article-image img,
+	.product-image img,
+	.hero-card img {
+		width: 100%;
+		height: auto !important;
+		max-height: 200px;
+		object-fit: cover;
+		display: block;
+	}
+
+	/* remove hover transforms on mobile to keep layout stable */
+	.hero-card:hover,
+	.service-card:hover,
+	.product-card:hover,
+	.article-card:hover {
+		transform: none !important;
+		box-shadow: 0 8px 24px rgba(0,0,0,0.08) !important;
+	}
+
+	/* minor text sizing */
+	.hero-title { font-size: 1.9rem; line-height: 1.12; }
+	.hero-description { font-size: 1rem; }
+}
+
 /* ======== Perbaikan Jarak Kosong di Home ======== */
 .hero-section {
   margin-bottom: 0;        /* hilangkan jarak kosong besar di bawah banner */
@@ -1558,42 +1668,6 @@ body {
   display: block;
   width: 100%;
   height: auto;
-}
-
-@media (max-width: 480px) {
-    .hero-title {
-        font-size: 2rem;
-    }
-
-    .hero-description {
-        font-size: 1rem;
-    }
-
-    .hero-card {
-        width: 300px;
-        height: 190px;
-        padding: 1.5rem;
-    }
-
-    .btn {
-        padding: 0.8rem 1.5rem;
-        font-size: 0.9rem;
-    }
-
-    .service-card,
-    .product-card,
-    .mission-card,
-    .value-card {
-        padding: 1.5rem;
-    }
-
-    .stats-card {
-        padding: 1.5rem;
-    }
-
-    .vision-card {
-        padding: 2rem;
-    }
 }
 
 /* Animation Classes */
@@ -1659,3 +1733,404 @@ body {
 .mt-4 { margin-top: 2rem; }
 .hidden { display: none; }
 .visible { display: block; }
+/* Animation Classes */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.6s ease;
+}
+
+.slide-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.6s ease;
+}
+
+.slide-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Loading Animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--white);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Utility Classes */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+.hidden { display: none; }
+.visible { display: block; }
+
+@media (max-width: 420px) {
+  /* tighter hero area so bg tidak menutupi konten */
+  .hero {
+    padding: 64px 12px 24px;
+    min-height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  /* cap visual area of background layer so it won't dominate phone view */
+  .hero-bg-layer {
+    position: absolute;
+    inset: 0;
+    height: 40vh;         /* visual height cap */
+    max-height: 40vh;
+    min-height: 220px;   /* maintain some visual presence */
+    background-size: cover !important;
+    background-position: center !important;
+    background-attachment: scroll !important;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .hero-overlay { z-index: 1; }
+
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 18px; /* pastikan tombol tetap di dalam area bg */
+    z-index: 2;
+  }
+
+  /* smaller, readable hero title and description */
+  .hero-title {
+    font-size: 1.45rem !important;
+    line-height: 1.16;
+    letter-spacing: -0.4px;
+    margin-bottom: 0.6rem;
+    text-align: center;
+    padding: 0 6px;
+  }
+  .hero-description {
+    font-size: 0.95rem !important;
+    margin-bottom: 1rem;
+    text-align: center;
+    padding: 0 6px;
+  }
+
+  /* stacked buttons, full-width but capped for readability */
+  .hero-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+    margin-top: 0.4rem;
+  }
+  .hero-buttons .btn,
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    max-width: 340px;
+    padding: 0.68rem 12px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+  }
+
+  /* ensure floating card (if present) drops into flow on phones */
+  .floating-card {
+    position: static !important;
+    transform: none !important;
+    margin: 12px auto 0;
+    width: 92% !important;
+    max-width: 360px !important;
+  }
+
+  /* make hero-card and other cards fluid */
+  .hero-card,
+  .service-card,
+  .product-card,
+  .mission-card,
+  .value-card,
+  .article-card {
+    transform: none !important;
+    height: auto !important;
+    min-height: auto !important;
+    padding: 0.9rem !important;
+    border-radius: 12px !important;
+  }
+
+  /* cap image heights to avoid overflow */
+  .article-image img,
+  .product-image img,
+  .hero-card img {
+    width: 100%;
+    height: auto !important;
+    max-height: 180px;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* reduce spacing a bit */
+  .services { padding-top: 20px; padding-bottom: 16px; }
+  .products { padding-top: 16px; padding-bottom: 12px; }
+
+  /* keep nav visible above hero */
+  .navbar { z-index: 1400; }
+}
+
+/* Extra-tight for very small phones */
+@media (max-width: 360px) {
+  .hero-title { font-size: 1.35rem !important; }
+  .hero-description { font-size: 0.9rem !important; }
+  .hero-bg-layer { height: 36vh; max-height: 36vh; min-height: 180px; }
+  .hero-buttons .btn,
+  .btn-primary,
+  .btn-secondary { max-width: 300px; font-size: 0.86rem; padding: 0.6rem 10px; }
+}
+
+/* ======== Perbaikan Jarak Kosong di Home ======== */
+.hero-section {
+  margin-bottom: 0;        /* hilangkan jarak kosong besar di bawah banner */
+  padding-bottom: 40px;    /* kasih sedikit ruang biar rapi */
+  overflow: hidden;        /* cegah elemen gambar overflow */
+}
+
+/* Jika section setelah banner terlalu jauh, rapatkan */
+.hero-section + section,
+.hero-section + div {
+  margin-top: 0;
+  padding-top: 20px;
+}
+
+/* ====== Perapian akhir jarak bawah banner di Home ====== */
+
+/* Pastikan hero tidak punya padding/margin berlebih */
+.hero-section {
+  margin-bottom: 0 !important;
+  padding-bottom: 10px !important; /* kecilin jadi 10px biar rapat tapi masih napas sedikit */
+}
+
+/* Pastikan elemen setelahnya tidak nambah jarak */
+.hero-section + section,
+.hero-section + div {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Jika masih ada gap putih, kemungkinan parent container-nya */
+.home-container {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Untuk jaga-jaga jika ada height tetap dari container */
+.hero-section img,
+.hero-section video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 480px) {
+	/* general page padding / hero area */
+	.hero {
+		padding: 100px 12px 40px;
+		min-height: auto;
+	}
+	.hero-container {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+
+	/* title & description sizing */
+	.hero-title {
+		font-size: 1.9rem;
+		line-height: 1.12;
+	}
+	.hero-description {
+		font-size: 1rem;
+	}
+
+	/* buttons: stacked full-width for touch */
+	.hero-buttons {
+		flex-direction: column;
+		gap: 0.6rem;
+		align-items: stretch;
+	}
+	.hero-buttons .btn,
+	.btn-primary,
+	.btn-secondary {
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0.9rem 12px;
+		font-size: 0.95rem;
+	}
+
+	/* hero-card: remove 3D transform and make fluid */
+	.hero-card {
+		width: 100%;
+		max-width: 360px;
+		height: auto !important;
+		min-height: 140px;
+		padding: 1rem;
+		transform: none !important;
+		perspective: none !important;
+		margin: 0 auto;
+		box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+		border-radius: 14px;
+	}
+
+	/* ensure background layers don't push layout */
+	.hero-bg-layer {
+		background-size: cover !important;
+		background-position: center !important;
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+	}
+	.hero-overlay { z-index: 1; }
+	.hero-container { z-index: 2; }
+
+	/* cards: remove fixed heights and large paddings */
+	.service-card,
+	.product-card,
+	.mission-card,
+	.value-card,
+	.article-card {
+		height: auto !important;
+		min-height: auto !important;
+		padding: 1rem !important;
+		border-radius: 12px;
+	}
+
+	/* reduce top padding used for large desktop spacing */
+	.service-card { padding-top: 32px; padding-bottom: 20px; }
+
+	/* images: cap heights and ensure cover */
+	.article-image img,
+	.product-image img,
+	.hero-card img {
+		width: 100%;
+		height: auto !important;
+		max-height: 200px;
+		object-fit: cover;
+		display: block;
+	}
+
+	/* avoid hover transforms breaking layout on mobile */
+	.hero-card:hover,
+	.service-card:hover,
+	.product-card:hover,
+	.article-card:hover {
+		transform: none !important;
+		box-shadow: 0 8px 24px rgba(0,0,0,0.08) !important;
+	}
+
+	/* typography and spacing */
+	.section-title { font-size: 1.6rem; }
+	.page-title { font-size: 1.6rem; }
+	.services { padding-top: 28px; padding-bottom: 20px; }
+	.products { padding-top: 20px; padding-bottom: 16px; }
+
+	/* nav / menu safety */
+	.navbar { z-index: 1300; }
+	.nav-menu { top: 70px; }
+
+	/* ensure no overflow from transformed children */
+	* { -webkit-tap-highlight-color: transparent; }
+}
+
+/* ===== Hero responsiveness adjustments (user-requested) ===== */
+
+/* 1. Kurangi ukuran teks di layar HP */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+    line-height: 2.6rem;
+    text-align: center;
+    padding: 0 10px;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+/* 2. Kontrol perilaku gambar background hero */
+.hero-section {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    background-size: contain;
+    background-position: top;
+  }
+}
+
+/* 3. Floating card di kanan hero */
+.floating-card {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+  .floating-card {
+    position: static;
+    transform: none;
+    margin: 20px auto 0;
+    width: 90%;
+  }
+}
+
+/* Tambahan mobile fix untuk floating card (agar selalu tampak di HP) */
+@media (max-width: 768px) {
+  .floating-card {
+    position: static !important;
+    transform: none !important;
+    margin: 20px auto;
+    display: block !important;
+  }
+}

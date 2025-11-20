@@ -4,6 +4,7 @@ import './Footer.css';
 
 const Footer = () => {
   const location = useLocation();
+  const isHome = location.pathname === '/';
 
   const handleBeritaClick = (e) => {
     if (location.pathname === '/') {
@@ -13,15 +14,39 @@ const Footer = () => {
         beritaSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
-    // If not on home page, let the Link component handle navigation to /#berita
   };
 
+  // SHORT FOOTER untuk halaman selain Home
+  if (!isHome) {
+    return (
+      <footer className="footer-short">
+        <div className="footer-short-content">
+          <h3>Bank Nusantara</h3>
+          <p>
+            Solusi keuangan <span className="highlight-blue">terpercaya untuk Anda</span>. Bersama kami,
+            wujudkan impian finansial Anda.
+          </p>
+
+          <p className="footer-short-bottom">
+            2025 Bank Nusantara. Seluruh hak cipta dilindungi undang-undang.
+            <br />
+            Diawasi oleh Otoritas Jasa Keuangan (OJK) | Dijamin oleh Lembaga Penjamin Simpanan (LPS)
+          </p>
+        </div>
+      </footer>
+    );
+  }
+
+  // FULL FOOTER untuk halaman Home
   return (
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-section">
           <h3>Bank Nusantara</h3>
-          <p>Solusi keuangan <span className="highlight-blue">terpercaya untuk Anda</span>. Bersama kami, wujudkan impian finansial Anda.</p>
+          <p>
+            Solusi keuangan <span className="highlight-blue">terpercaya untuk Anda</span>. Bersama kami,
+            wujudkan impian finansial Anda.
+          </p>
           <p className="social-title">Ikuti Kami:</p>
           <div className="social-icons">
             <a href="#"><i className="fab fa-facebook-f"></i></a>
@@ -37,14 +62,14 @@ const Footer = () => {
           <ul>
             <li><Link to="/products?category=PENDANAAN">Pendanaan</Link></li>
             <li><Link to="/products?category=PEMBIAYAAN">Pembiayaan</Link></li>
-            <li><Link to="/products?category=JASA%20%26%20LAYANAN">Jasa & Layanan</Link></li>
+            <li><Link to="/products?category=JASA%20%26%20LAYANAN">Jasa &amp; Layanan</Link></li>
           </ul>
         </div>
 
         <div className="footer-section">
           <h4>Tentang Kami</h4>
           <ul>
-            <li><Link to="/vision-mission">Visi & Misi</Link></li>
+            <li><Link to="/vision-mission">Visi &amp; Misi</Link></li>
             <li><a href="#">Sejarah</a></li>
             <li><a href="#">Karir</a></li>
             <li><Link to="/#berita" onClick={handleBeritaClick}>Berita</Link></li>
@@ -62,11 +87,11 @@ const Footer = () => {
       <hr />
 
       <div className="footer-bottom">
-        <p>© 2025 Bank Nusantara. Seluruh hak cipta dilindungi undang-undang.</p>
+        <p>2025 Bank Nusantara. Seluruh hak cipta dilindungi undang-undang.</p>
         <p>Diawasi oleh Otoritas Jasa Keuangan (OJK) | Dijamin oleh Lembaga Penjamin Simpanan (LPS)</p>
       </div>
     </footer>
   );
-};
+}
 
 export default Footer;

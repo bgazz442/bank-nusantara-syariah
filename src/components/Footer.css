@@ -1,19 +1,80 @@
 .footer {
   background-color: #1348b6;
   color: #ffffff;
-  padding: 50px 10%;
+  padding: 40px 10% 30px;
   font-family: "Poppins", sans-serif;
+}
+
+/* Short footer (halaman selain Home) dengan desain sama tapi lebih ringkas */
+.footer-short {
+  background-color: #1348b6;
+  color: #ffffff;
+  padding: 24px 10% 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.footer-short-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.footer-short h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.footer-short p {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.footer-short-bottom {
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.7); /* satu garis jelas di perbatasan */
+}
+
+/* Pastikan semua teks di footer-short berwarna putih, termasuk span highlight */
+.footer-short,
+.footer-short h3,
+.footer-short p,
+.footer-short-bottom,
+.footer-short .highlight-blue {
+  color: #ffffff !important;
+}
+
+@media (max-width: 480px) {
+  .footer-short {
+    padding: 20px 16px;
+  }
+
+  .footer-short h3 {
+    font-size: 20px;
+  }
+
+  .footer-short p {
+    font-size: 14px;
+  }
 }
 
 .footer-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+  gap: 12px;
 }
 
 .footer-section {
   flex: 1 1 220px;
-  margin: 10px 20px;
+  margin: 8px 16px;
 }
 
 .footer-section h3,
@@ -25,6 +86,8 @@
 .footer-section p {
   font-size: 14px;
   line-height: 1.7;
+  max-width: 460px;
+  margin-bottom: 8px;
 }
 
 .highlight-blue {
@@ -34,10 +97,14 @@
 .footer-section ul {
   list-style: none;
   padding: 0;
+  max-width: 460px;
 }
 
 .footer-section ul li {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 .footer-section ul li a {
@@ -83,7 +150,10 @@
 
 .footer hr {
   border: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.85); /* garis utama lebih tebal & jelas */
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.6),  /* garis kedua */
+    0 4px 0 rgba(255, 255, 255, 0.3);  /* garis ketiga */
   margin: 30px 0 15px;
 }
 
@@ -92,6 +162,19 @@
   font-size: 13px;
   color: #d4e3ff;
   line-height: 1.6;
+}
+
+/* Batasi lebar teks agar lebih rapi dan mudah dibaca */
+.footer-section p,
+.footer-section ul {
+  max-width: 460px;
+}
+
+/* Pastikan teks kontak panjang tetap membungkus dengan rapi */
+.footer-section p,
+.footer-section li {
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 /* Ensure footer text is white on mobile/desktop (only font color changed) */
@@ -103,17 +186,88 @@
 .footer a:not(.social-icons a),
 .footer .footer-legal,
 .footer .footer-bottom {
-	color: #ffffff !important;
+  color: #ffffff !important;
 }
 
-/* Responsif */
+/* Responsif: khusus mobile, gunakan tema biru cerah dengan teks kontras */
 @media (max-width: 768px) {
+  .footer {
+    background-color: #007bff; /* Biru cerah */
+    color: #ffffff;            /* Teks putih */
+    padding: 60px 16px;        /* ruang atas bawah lebih lega di mobile */
+  }
+
   .footer-container {
     flex-direction: column;
-    text-align: center;
+    text-align: left;
+    align-items: stretch; /* semua kolom penuh lebar */
   }
 
   .footer-section {
-    margin: 20px 0;
+    margin: 16px 0;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  /* Kolom pertama (brand + sosmed) dirapikan di tengah pada mobile */
+  .footer-section:first-child {
+    text-align: center;
+    align-items: center;
+  }
+
+  .social-title {
+    margin-top: 18px;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .social-icons {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .footer-section h3,
+  .footer-section h4 {
+    color: #ffffff;            /* Judul putih */
+  }
+
+  .footer-section p,
+  .footer-section li {
+    color: #ffffff;            /* Teks utama putih */
+  }
+
+  .footer-section ul {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* Pastikan paragraf & list di semua kolom tidak terpotong dan tampak rapi */
+  .footer-section p,
+  .footer-section ul {
+    max-width: 100%;
+  }
+
+  /* Kolom selain pertama tetap rata kiri untuk keterbacaan, tapi tidak terlalu mepet */
+  .footer-section:nth-child(n + 2) {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .footer-section ul li a {
+    color: #f8f9fa;            /* Link abu muda */
+  }
+
+  .footer-section ul li a:hover {
+    color: #ffc107;            /* Hover kuning cerah */
+    text-decoration: none;
+  }
+
+  .footer-bottom {
+    background-color: #0056b3; /* Biru lebih gelap untuk strip bawah */
+    padding: 15px 0;
+    font-size: 0.85em;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 24px;
   }
 }

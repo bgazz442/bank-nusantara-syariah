@@ -11,14 +11,15 @@
 .nav-container {
     display: flex;
     align-items: center;
-    gap: 28px; /* gap-7 in Tailwind */
-    padding: 0 32px; /* px-8 in Tailwind */
-    padding-top: 12px; /* py-3 in Tailwind */
-    padding-bottom: 12px;
-    border-radius: 9999px; /* rounded-full */
+    gap: 0px; /* compact nav with no gap initially */
+    padding: 0 22px; /* lebih kecil: lebar mengikuti isi teks */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 9999px;
     background: white;
-    box-shadow: 0 16px 80px rgba(0, 0, 0, 0.1); /* shadow-[0_4px_20px_rgba(0,0,0,0.1)] */
+    box-shadow: 0 16px 80px rgba(0, 0, 0, 0.1);
     border: 1px solid #ececec;
+    transition: padding 0.28s ease, box-shadow 0.28s ease; /* nav langsung melebar / mengecil tanpa delay tambahan */
 }
 
 .nav-logo-link {
@@ -94,52 +95,64 @@
     background-color: #ca8a04; /* hover:bg-yellow-600 */
 }
 
+/* Desktop: ketika More terbuka, navbar melebar supaya terasa mengikuti popup */
+@media (min-width: 769px) {
+    .nav-container.more-open {
+        padding-left: 26px; /* sedikit lebih lebar dari state normal */
+        padding-right: 72px; /* cukup untuk "menampung" popup, tapi tidak oversize */
+        box-shadow: 0 18px 90px rgba(0, 0, 0, 0.16);
+        transition: padding 0.28s ease, box-shadow 0.28s ease; /* nav melebar & mengecil halus */
+    }
+}
+
 /* Dropdown Menu */
 .dropdown {
     position: relative;
 }
 
 .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
+    /* Desktop default: panel lebih kecil, slide-in + fade dari KANAN dekat atas */
+    position: fixed;
+    top: 82px; /* sedikit di bawah navbar, tapi terpisah */
+    right: 18px;
+    left: auto;
+    max-height: 60vh; /* tidak terlalu tinggi, tetap bisa scroll isi */
+    width: 280px;
+    max-width: 90vw;
     background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
-    min-width: 280px;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    border: 1px solid rgba(217, 119, 6, 0.1);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.16);
+    border-radius: 14px;
+    border: 1px solid rgba(217, 119, 6, 0.16);
+    display: block; /* selalu dirender, tapi dikendalikan oleh opacity + pointer-events */
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px) scale(0.95);
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateX(10px); /* offset kecil agar gerakan lebih halus */
+    transition: opacity 0.24s ease-out, transform 0.24s ease-out;
+    transition-delay: 0s; /* state dasar: popup langsung hilang ketika More ditutup */
+    pointer-events: none; /* tidak bisa diklik ketika disembunyikan */
     z-index: 1000;
     list-style: none;
     padding: 8px 0;
-    margin: 8px 0 0 0;
+    margin: 0;
+    overflow-y: auto;
 }
 
 .dropdown-menu::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    right: 20px;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid white;
+    display: none; /* hilangkan panah penghubung agar panel terlihat terpisah dari navbar */
 }
 
 .dropdown-menu.show {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0) scale(1);
+    transform: translateX(0); /* slide pendek dari kanan + fade-in */
+    transition-delay: 0.20s; /* saat membuka: popup muncul setelah nav mulai/melebar, bukan sebelumnya */
+    pointer-events: auto; /* aktif dan bisa diklik ketika tampil */
 }
 
 .dropdown-menu li {
-    border-bottom: 1px solid rgba(217, 119, 6, 0.05);
-    margin: 0 8px;
-    border-radius: 6px;
+    border-bottom: 1px solid rgba(217, 119, 6, 0.06);
+    margin: 0 10px;
+    border-radius: 8px;
     overflow: hidden;
 }
 
@@ -149,11 +162,11 @@
 
 .dropdown-menu a {
     display: block;
-    padding: 14px 20px;
+    padding: 10px 16px; /* lebih ringkas, rapi */
     color: #374151; /* text-gray-700 */
     text-decoration: none;
     font-weight: 500;
-    transition: all 0.3s ease;
+    transition: all 0.22s ease;
     position: relative;
 }
 
@@ -479,19 +492,19 @@
 	/* dropdown animation: use opacity + translateY for smooth appearance (no layout jumps) */
 	.dropdown-menu {
 		opacity: 0;
-		visibility: hidden;
-		transform: translateY(-6px);
+	visibility: hidden;
+	transform: translateY(-6px);
 		transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s;
 	}
 
 	/* show dropdown smoothly */
 	.dropdown.show .dropdown-menu,
 	.dropdown.open .dropdown-menu,
-	.nav-menu.active .dropdown .dropdown-menu {
-		opacity: 1;
-		visibility: visible;
-		transform: translateY(0);
-		transition-delay: 0s;
+	.nav-menu.active .dropdown .dropdown-menu.show {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+	transition-delay: 0s;
 	}
 }
 
